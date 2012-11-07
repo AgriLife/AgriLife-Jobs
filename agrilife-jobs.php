@@ -23,13 +23,6 @@ function job_posting_search_form($job_type_selected='',$term='Wildlife Biologist
 	<h4>Search Job Postings</h4>
 	</label>
 	<form role="search" class="searchform" method="get" id="searchform" action="<?php echo home_url( '/' ); ?>">
-	<?php
-	/*echo '<div class="tax-options">';
-	$args = array('order'=>'ASC','hide_empty'=>true);
-	echo get_terms_dropdown($job_type_selected, $args);
-	echo '</div>';
-	*/
-	?>
 	  <input type="text" class="s" name="searchjobpostings" id="s" placeholder="<?php echo $term; ?>" onfocus="if(this.value==this.defaultValue)this.value='<?php echo $term; ?>';" onblur="if(this.value=='<?php echo $term; ?>')this.value=this.defaultValue;"/>
 	  <input class="job_posting-submit" type="submit" name="submit" value="Search" />	
 	  <input type="hidden" name="post_type" value="job_posting" />
@@ -169,8 +162,7 @@ function job_postings_shortcode() {
 	if ( get_query_var('page') ) $paged = get_query_var('page'); 
 	 
 	query_posts( '&post_type=job_posting&post_status=publish&posts_per_page='.get_option('posts_per_page').'&paged=' . $paged ); 
-	//include(MY_THEME_FOLDER . '/archive-job_posting.php');
-	get_template_part( 'loop', 'job_listings' );
+	include( 'archive-job_posting.php');
 
 }
 add_shortcode('job_postings', 'job_postings_shortcode');
@@ -178,20 +170,19 @@ add_shortcode('job_postings', 'job_postings_shortcode');
 /**
  * Get the requested templates
  */
-add_filter( 'archive_template', 'get_archive_template' );
-function get_archive_template( $archive_template ) {
+add_filter( 'archive_template', 'jobs_get_archive_template' );
+function jobs_get_archive_template( $archive_template ) {
   global $post;
   $plugindir = dirname( __FILE__ );
   
-  if( get_query_var( 'post_type' ) == 'job_posting' ) {
+  if( is_post_type_archive ( 'job_posting' ) ) {
     $archive_template = $plugindir . '/archive-job_posting.php';
   }
   return $archive_template;
-
 }
 
-add_filter( 'search_template', 'get_search_template' );
-function get_search_template( $search_template ) {
+add_filter( 'search_template', 'jobs_get_search_template' );
+function jobs_get_search_template( $search_template ) {
   global $post;
   $plugindir = dirname( __FILE__ );
   
@@ -199,11 +190,10 @@ function get_search_template( $search_template ) {
     $search_template = $plugindir . '/archive-job_posting.php';
   }
   return $search_template;
-
 }
 
-add_filter( 'single_template', 'get_single_template' );
-function get_single_template( $single_template ) {
+add_filter( 'single_template', 'jobs_get_single_template' );
+function jobs_get_single_template( $single_template ) {
   global $post;
   $plugindir = dirname( __FILE__ );
   
@@ -211,7 +201,5 @@ function get_single_template( $single_template ) {
     $single_template = $plugindir . '/single-job_posting.php';
   }
   return $single_template;
-
 }
-
 ?>
