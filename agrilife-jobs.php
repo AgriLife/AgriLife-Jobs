@@ -129,7 +129,7 @@ function job_posting_details_meta() {
 	$contact_phone	= ($my_meta['contact-phone'] <> '' ? $my_meta['contact-phone'] : $custom["contact_phone"][0]);
 	$contact_email	= ($my_meta['contact-email'] <> '' ? $my_meta['contact-email'] : $custom["contact_email"][0]);
 	
-	include(MY_THEME_FOLDER . '/includes/meta_boxes/jobs_meta_html.php');
+	include('jobs_meta_html.php');
 }
 
 
