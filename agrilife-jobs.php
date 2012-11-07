@@ -155,4 +155,63 @@ function save_job_meta(){
   
 }
 
+/**
+ * The Job Postings shortcode. [job_postings]
+ *
+ * Shows the entries in the job_postings custom post type. Just points to the archive page.
+ **
+ */
+function job_postings_shortcode() {
+	global $post;
+
+	$paged = 1; 
+	if ( get_query_var('paged') ) $paged = get_query_var('paged'); 
+	if ( get_query_var('page') ) $paged = get_query_var('page'); 
+	 
+	query_posts( '&post_type=job_posting&post_status=publish&posts_per_page='.get_option('posts_per_page').'&paged=' . $paged ); 
+	//include(MY_THEME_FOLDER . '/archive-job_posting.php');
+	get_template_part( 'loop', 'job_listings' );
+
+}
+add_shortcode('job_postings', 'job_postings_shortcode');
+
+/**
+ * Get the requested templates
+ */
+add_filter( 'archive_template', 'get_archive_template' );
+function get_archive_template( $archive_template ) {
+  global $post;
+  $plugindir = dirname( __FILE__ );
+  
+  if( get_query_var( 'post_type' ) == 'job_posting' ) {
+    $archive_template = $plugindir . '/archive-job_posting.php';
+  }
+  return $archive_template;
+
+}
+
+add_filter( 'search_template', 'get_search_template' );
+function get_search_template( $search_template ) {
+  global $post;
+  $plugindir = dirname( __FILE__ );
+  
+  if( get_query_var( 'post_type' ) == 'job_posting' ) {
+    $search_template = $plugindir . '/archive-job_posting.php';
+  }
+  return $search_template;
+
+}
+
+add_filter( 'single_template', 'get_single_template' );
+function get_single_template( $single_template ) {
+  global $post;
+  $plugindir = dirname( __FILE__ );
+  
+  if( get_query_var( 'post_type' ) == 'job_posting' ) {
+    $single_template = $plugindir . '/single-job_posting.php';
+  }
+  return $single_template;
+
+}
+
 ?>
