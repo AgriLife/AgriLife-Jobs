@@ -9,7 +9,7 @@ get_header(); ?>
 		<div id="wrap">
 			<div id="content" role="main">
 				<h1 class="entry-title">Jobs</h1>
-				<?php get_template_part( 'loop', 'job_listings' ); ?>
+				<?php include( 'loop-job_listings.php' ); ?>
 					
 			</div><!-- #content -->
 		</div><!-- #wrap -->
