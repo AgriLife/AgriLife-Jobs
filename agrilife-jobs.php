@@ -202,4 +202,13 @@ function jobs_get_single_template( $single_template ) {
   }
   return $single_template;
 }
+
+/**
+ * Enqueue the required style
+ */
+add_action( 'wp_enqueue_scripts', 'jobs_add_frontend_style' );
+function jobs_add_frontend_style() {
+  wp_register_style( 'jobs-front-style', plugins_url( 'jobs-frontend-style.css', __FILE__ ) );
+  wp_enqueue_style( 'jobs-front-style' );
+}
 ?>

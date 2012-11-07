@@ -1,0 +1,85 @@
+.job-search-form {
+	margin-bottom: 20px;
+	padding: 10px;
+	background: #edece4;
+	border-top: 1px solid #d5d1bf;
+	border-bottom: 1px solid #d5d1bf;
+	position: relative;
+}
+
+.job-search-form .searchform {
+	top: 8px;
+}
+
+.job-search-form label h4 {
+	margin-bottom: 5px;
+}
+
+.job-listing-ul,
+.job-listing-item {
+	list-style-type: none;
+	margin-left: 0;
+	padding-left: 0;
+}
+
+.job-listing-item {
+	list-style-type: none;
+	margin-left: 0;
+	padding-left: 0;
+	overflow: hidden;
+	display: block;
+	background: #EAE6D2;
+	background: rgba(217, 208, 173, .30);
+	border-bottom: 1px solid #fafaf6;
+}
+
+
+.job-listing-item:nth-child(even) {
+	background: #EAE6D2;
+	background: rgba(217, 208, 173, .10);
+}
+
+a.job-listing-link {
+	overflow: hidden;
+	display: block;	
+	text-decoration: none;
+	padding: 10px;
+	border-bottom: 1px solid #d5d1c3;		
+}
+
+a.job-listing-link:hover {
+	background: #f1efce;
+	border-bottom: 1px solid #9f9490;		
+}
+
+.job-title {
+	font: 90% "minion-pro-1","minion-pro-2", 'Cambria', 'Georgia', 'Times New Roman', serif;
+	font-size: 22px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.job-agency,
+.job-posted-date,
+.job-number,
+body.home #content h3.job-agency,
+body.home #content h4.job-posted-date,
+body.home #content h4.job-number {
+	font-family: ff-dagny-web-pro-1, ff-dagny-web-pro-2, 'Lucida Grande', 'Lucida Sans Unicode', sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	color: #433C3A;
+	float: left;
+	line-height: 1.2em;
+	width: 65%;
+}
+
+#content p.job-location {
+	font-size: 12px;
+	color: #9f9490;
+	width: 30%;
+	margin: 0 0 0 65%;
+	padding-left: 20px;
+	background: transparent url('images/map-marker.png?v=100') no-repeat left top;
+}
+
