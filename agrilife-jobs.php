@@ -162,7 +162,7 @@ function job_postings_shortcode() {
 	if ( get_query_var('page') ) $paged = get_query_var('page'); 
 	 
 	query_posts( '&post_type=job_posting&post_status=publish&posts_per_page='.get_option('posts_per_page').'&paged=' . $paged ); 
-	include( 'archive-job_posting.php');
+	include( 'loop-job_listings.php');
 
 }
 add_shortcode('job_postings', 'job_postings_shortcode');
