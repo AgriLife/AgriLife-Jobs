@@ -1,4 +1,4 @@
-<h4>Details</h4>
+<h4>Details</h4> 
 	<p><label class="admin-form-label" for="job_number">Job Number</label>
 	<input type="text" class="admin-form-input" id="job_number" name="job_number" value="<?php if(!empty($job_number)) echo $job_number; ?>" placeholder="12345" size="25" /></p>
 	
@@ -35,3 +35,16 @@
 
 	<p><label class="admin-form-label" for="phone">Contact Phone</label>
 	<input type="text" class="admin-form-input" id="contact-phone" name="contact_phone" value="<?php if(!empty($contact_phone)) echo $contact_phone; ?>" placeholder="777-777-7777" size="25" /></p>	 
+	
+	<p><label class="admin-form-label" for="phone">File</label>
+	<?php
+	if(!empty($fileupload)){
+		echo '<span id="fileuploadfield"><input type="hidden" name="fileupload" value="' . $fileupload . '"><a href="' . $fileupload . '">';
+		$pattern = '/[^\/]*$/';
+		preg_match($pattern, $fileupload, $matches);
+		print_r($matches[0]);
+		echo '</a> <a href="javascript:;" style="color:red;text-decoration:none;font-weight:bold;" onclick="this.blur();document.querySelector(\'#fileuploadfield\').innerHTML=\'None\';">X</a></span>';
+	} else {
+		echo 'None';
+	}
+	?>

@@ -1,4 +1,4 @@
-<?php
+<?php 
 /*
  * Plugin Name: Agrilife Jobs
  * Plugin URI: https://github.com/channeleaton/AgriLife-Jobs
@@ -107,21 +107,21 @@ function job_posting_details_meta() {
 	
 	// Still Support the legacy _my_meta fields
 	$my_meta = get_post_meta($post->ID,'_my_meta',TRUE);
-	
-	$job_number 	= ($my_meta['job_number']<>''? $my_meta['job_number'] : $custom["job_number"][0]);
-	$agency 		= ($my_meta['agency']<>'' ? $my_meta['agency'] 		: $custom["agency"][0]);
-	$location		= ($my_meta['location']<>'' ? $my_meta['location'] 	: $custom["location"][0]);
-	$type			= ($my_meta['type'] <>'' ? $my_meta['type']			: $custom["classification"][0]);
-	$salary			= ($my_meta['salary']<>'' ? $my_meta['salary']		: $custom["salary"][0]);
-	$website		= ($my_meta['website']<>'' ? $my_meta['website']		: $custom["website"][0]);
-	$apply_date		= ($my_meta['apply-date'] <> '' ? $my_meta['apply-date'] : $custom["apply_date"][0]);
-	$start_date		= ($my_meta['start-date'] <> '' ? $my_meta['start-date'] : $custom["start_date"][0]);
-	$description  	= ($my_meta['description'] <> '' ? $my_meta['description'] : $custom["description"][0]);
-	$qualifications	= ($my_meta['qualifications'] <> '' ? $my_meta['qualifications'] : $custom["qualifications"][0]);
-	$contact_name 	= ($my_meta['contact-name'] <> '' ? $my_meta['contact-name'] : $custom["contact_name"][0]);
-	$contact_phone	= ($my_meta['contact-phone'] <> '' ? $my_meta['contact-phone'] : $custom["contact_phone"][0]);
-	$contact_email	= ($my_meta['contact-email'] <> '' ? $my_meta['contact-email'] : $custom["contact_email"][0]);
-	
+  
+  $job_number   = (is_array($my_meta)&&$my_meta['job_number']<>''? $my_meta['job_number'] : $custom["job_number"][0]);
+	$agency 		= (is_array($my_meta)&&$my_meta['agency']<>'' ? $my_meta['agency'] 		: $custom["agency"][0]);
+	$location		= (is_array($my_meta)&&$my_meta['location']<>'' ? $my_meta['location'] 	: $custom["location"][0]);
+	$type			= (is_array($my_meta)&&$my_meta['type'] <>'' ? $my_meta['type']			: $custom["classification"][0]);
+	$salary			= (is_array($my_meta)&&$my_meta['salary']<>'' ? $my_meta['salary']		: $custom["salary"][0]);
+	$website		= (is_array($my_meta)&&$my_meta['website']<>'' ? $my_meta['website']		: $custom["website"][0]);
+	$apply_date		= (is_array($my_meta)&&$my_meta['apply-date'] <> '' ? $my_meta['apply-date'] : $custom["apply_date"][0]);
+	$start_date		= (is_array($my_meta)&&$my_meta['start-date'] <> '' ? $my_meta['start-date'] : $custom["start_date"][0]);
+	$description  	= (is_array($my_meta)&&$my_meta['description'] <> '' ? $my_meta['description'] : $custom["description"][0]);
+	$qualifications	= (is_array($my_meta)&&$my_meta['qualifications'] <> '' ? $my_meta['qualifications'] : $custom["qualifications"][0]);
+	$contact_name 	= (is_array($my_meta)&&$my_meta['contact-name'] <> '' ? $my_meta['contact-name'] : $custom["contact_name"][0]);
+	$contact_phone	= (is_array($my_meta)&&$my_meta['contact-phone'] <> '' ? $my_meta['contact-phone'] : $custom["contact_phone"][0]);
+  $contact_email  = (is_array($my_meta)&&$my_meta['contact-email'] <> '' ? $my_meta['contact-email'] : $custom["contact_email"][0]);
+  $fileupload  = (is_array($my_meta)&&$my_meta['fileupload'] <> '' ? $my_meta['fileupload'] : $custom["fileupload"][0]);
 	include('jobs_meta_html.php');
 }
 
@@ -145,6 +145,7 @@ function save_job_meta(){
   update_post_meta($post->ID, "contact_name", $_POST["contact_name"]);
   update_post_meta($post->ID, "contact_email", $_POST["contact_email"]);
   update_post_meta($post->ID, "contact_phone", $_POST["contact_phone"]);
+  update_post_meta($post->ID, "fileupload", $_POST["fileupload"]);
   
 }
 
