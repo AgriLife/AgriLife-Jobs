@@ -60,11 +60,11 @@
 			//echo 'agency: '.$my_meta['agency'];
 			//echo '<hr />custom:<pre>'.print_r($custom).'</pre>';
 		
-			$job_number     = ($my_meta['job_number']<>'' ? $my_meta['job_number']	: $custom["job_number"][0]);
+			$job_number     = (is_array($my_meta)&&$my_meta['job_number']<>'' ? $my_meta['job_number']	: $custom["job_number"][0]);
 			if($job_number=='')
 				$job_number = get_the_ID();
-			$agency 		= ($my_meta['agency']<>'' ? $my_meta['agency'] 			: $custom["agency"][0]);
-			$location		= ($my_meta['location']<>'' ? $my_meta['location'] 		: $custom["location"][0]);
+			$agency 		= (is_array($my_meta)&&$my_meta['agency']<>'' ? $my_meta['agency'] 			: $custom["agency"][0]);
+			$location		= (is_array($my_meta)&&$my_meta['location']<>'' ? $my_meta['location'] 		: $custom["location"][0]);
 				?>
 			<li class="job-listing-item">
 				<a class="job-listing-link" href="<?php the_permalink(); ?>">
