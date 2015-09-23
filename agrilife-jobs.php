@@ -132,12 +132,19 @@ add_action('save_post', 'save_job_meta');
 
 function save_job_meta(){
   global $post;
+
+  $safe_url = $_POST["website"];
+  if($safe_url[0] == "<" && $safe_url[1] == "a"){
+    $website_pattern = '#[-a-zA-Z0-9@:%_\+.~\#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~\#?&//=]*)?#si';
+    preg_match($website_pattern, $safe_url, $website_matches);
+    $safe_url = $website_matches[0];
+  }
  
   update_post_meta($post->ID, "job_number", $_POST["job_number"]);
   update_post_meta($post->ID, "agency", $_POST["agency"]);
   update_post_meta($post->ID, "location", $_POST["location"]);
   update_post_meta($post->ID, "salary", $_POST["salary"]);
-  update_post_meta($post->ID, "website", $_POST["website"]);
+  update_post_meta($post->ID, "website", $safe_url);
   update_post_meta($post->ID, "apply_date", $_POST["apply_date"]);
   update_post_meta($post->ID, "start_date", $_POST["start_date"]);
   update_post_meta($post->ID, "description", $_POST["description"]);

@@ -72,8 +72,14 @@ get_header(); ?>
 							<?php } ?>
 							
 							<?php if ($website) { ?>	
-							<dt class="job-posting-dt">website</dt>							
-								<dd class="job-posting-dd"><?php echo $website;?></dd>
+							<dt class="job-posting-dt">Website</dt>							
+								<dd class="job-posting-dd"><?php
+								if($website[0] == "<" && $website[1] == "a"){
+									echo $website;
+								} else {
+									echo '<a target="_blank" href="' . $website . '">' . $website . '</a>';
+								}
+								?></dd>
 							<?php } ?>
 								
 							<?php if ($salary) { ?>	
