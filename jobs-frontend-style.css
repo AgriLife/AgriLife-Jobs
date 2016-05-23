@@ -11,12 +11,23 @@
 	top: 8px;
 }
 
+.job-search-form .searchform input {
+	margin: 0;
+}
+
 .job-search-form label h4 {
 	margin-bottom: 5px;
 }
 
 .job-listing-ul,
-.job-listing-item {
+.entry-content ul.job-listing-ul {
+	border-top: double #d5d1bf;
+	margin-top: 1.2em;
+}
+
+.job-listing-ul,
+.job-listing-item,
+.entry-content ul.job-listing-ul {
 	list-style-type: none;
 	margin-left: 0;
 	padding-left: 0;
@@ -25,6 +36,8 @@
 .job-listing-item {
 	list-style-type: none;
 	margin-left: 0;
+	margin-top: .5em;
+	margin-bottom: .5em;
 	padding-left: 0;
 	overflow: hidden;
 	display: block;
@@ -72,9 +85,12 @@ body.home #content h4.job-number {
 	float: left;
 	line-height: 1.2em;
 	width: 65%;
+	margin-top: 0;
+	margin-bottom: 0;
 }
 
-#content p.job-location {
+#content p.job-location,
+.content p.job-location {
 	font-size: 12px;
 	color: #9f9490;
 	width: 30%;
@@ -83,3 +99,17 @@ body.home #content h4.job-number {
 	background: transparent url('images/map-marker.png?v=100') no-repeat left top;
 }
 
+dt.job-posting-dt {
+	font-size: 1.2em;
+	line-height: 1em;
+	margin-top: .2em;
+	margin-bottom: .5em;
+	padding: .5em 0 1em 0;
+	font-weight: bold;
+}
+
+dd.job-posting-dd {
+	border-bottom: 1px solid #d0ca9b;
+	margin: -3em 0 .5em 0;
+	padding: 0 0 .75em 195px;
+}
