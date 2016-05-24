@@ -219,4 +219,52 @@ function jobs_add_frontend_style() {
   wp_register_style( 'jobs-front-style', plugins_url( 'jobs-frontend-style.css', __FILE__ ) );
   wp_enqueue_style( 'jobs-front-style' );
 }
+
+if ( ! function_exists( 'agriflex_posted_on' ) ) :
+/**
+ * Prints HTML with meta information for the current post—date/time and author.
+ *
+ * @since AgriFlex 1.0
+ * @author J. Aaron Eaton <aaron@channeleaton.com>
+ */
+function agriflex_posted_on() {
+     printf( __( '<span class="sep">Posted on </span><a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s">%4$s</time></a><span class="by-author"> <span class="sep"> by </span> <span class="author vcard"><a class="url fn n" href="%5$s" title="%6$s" rel="author">%7$s</a></span></span>', 'twentyeleven' ),
+          esc_url( get_permalink() ),
+          esc_attr( get_the_time() ),
+          esc_attr( get_the_date( 'c' ) ),
+          esc_html( get_the_date() ),
+          esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
+          sprintf( esc_attr__( 'View all posts by %s', 'agriflex' ), get_the_author() ),
+          esc_html( get_the_author() )
+     );
+}
+endif; // agriflex_posted_on
+
+if ( ! function_exists( 'agriflex_posted_in' ) ) :
+/**
+ * Prints HTML with meta information for the current post (category, tags and permalink).
+ *
+ * @since AgriFlex 1.0
+ * @author J. Aaron Eaton <aaron@channeleaton.com>
+ */
+function agriflex_posted_in() {
+     // Retrieves tag list of current post, separated by commas.
+     $tag_list = get_the_tag_list( '', ', ' );
+     if ( $tag_list ) {
+          $posted_in = __( 'This entry was posted in %1$s and tagged %2$s. Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'agriflex' );
+     } elseif ( is_object_in_taxonomy( get_post_type(), 'category' ) ) {
+          $posted_in = __( 'This entry was posted in %1$s. Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'agriflex' );
+     } else {
+          $posted_in = __( 'Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'agriflex' );
+     }
+     // Prints the string, replacing the placeholders.
+     printf(
+          $posted_in,
+          get_the_category_list( ', ' ),
+          $tag_list,
+          get_permalink(),
+          the_title_attribute( 'echo=0' )
+     );
+}
+endif; // agriflex_posted_in
 ?>
