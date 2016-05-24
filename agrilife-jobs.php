@@ -183,7 +183,7 @@ function jobs_get_archive_template( $archive_template ) {
   global $post;
   $plugindir = dirname( __FILE__ );
   
-  if( is_post_type_archive ( 'job_posting' ) ) {
+  if(is_archive() && get_post_type() == 'job_posting'){
     $archive_template = $plugindir . '/archive-job_posting.php';
   }
   return $archive_template;
