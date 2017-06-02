@@ -23,11 +23,11 @@
 
 
 	<div class="job-search-form">
-		<label for="job-search-title-field">
+		<label for="s">
 		<h2>Search Job Board Database</h2>
 		</label>
 		<form role="search" class="searchform" method="get" id="searchform" action="<?php echo home_url( '/' ); ?>">
-			<input type="text" class="s" name="job-search-title-field" id="job-search-title-field" placeholder="Wildlife Biologist" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;"/><br />
+			<input type="text" class="s" name="s" id="s" placeholder="Wildlife Biologist" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;"/><br />
 			<input type="hidden" name="post_type" value="job_posting" />
 		</form>
 	</div>
