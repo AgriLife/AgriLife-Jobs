@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Plugin Name: Agrilife Jobs
  * Plugin URI: https://github.com/channeleaton/AgriLife-Jobs
@@ -24,11 +24,11 @@ function job_posting_search_form($job_type_selected='',$term='Wildlife Biologist
 	</label>
 	<form role="search" class="searchform" method="get" id="searchform" action="<?php echo home_url( '/' ); ?>">
 	  <input type="text" class="s" name="searchjobpostings" id="s" placeholder="<?php echo $term; ?>" onfocus="if(this.value==this.defaultValue)this.value='<?php echo $term; ?>';" onblur="if(this.value=='<?php echo $term; ?>')this.value=this.defaultValue;"/>
-	  <input class="job_posting-submit" type="submit" name="submit" value="Search" />	
+	  <input class="job_posting-submit" type="submit" name="submit" value="Search" />
 	  <input type="hidden" name="post_type" value="job_posting" />
 	</form>
 	</div>
-<?php 
+<?php
 }
 
 
@@ -81,7 +81,7 @@ function create_job_taxonomies() {
           'update_item' => __( 'Update Job Category' ),
           'add_new_item' => __( 'Add New Job Category' ),
           'new_item_name' => __( 'New Job Category Name' ),
-     );     
+     );
 
      register_taxonomy( 'job_category', array( 'job_posting' ), array(
           'hierarchical' => true,
@@ -94,8 +94,8 @@ function create_job_taxonomies() {
 }
 
 /* Define the custom box for job posting custom post type */
-//add_action('admin_init','job_posting_meta_init'); 
-add_action('admin_init','job_posting_meta_init'); 
+//add_action('admin_init','job_posting_meta_init');
+add_action('admin_init','job_posting_meta_init');
 
 function job_posting_meta_init() {
 	add_meta_box('job_posting_details_meta', 'Enter Job Details', 'job_posting_details_meta', 'job_posting', 'normal', 'high');
@@ -104,10 +104,10 @@ function job_posting_meta_init() {
 function job_posting_details_meta() {
 	global $post;
 	$custom = get_post_custom($post->ID);
-	
+
 	// Still Support the legacy _my_meta fields
 	$my_meta = get_post_meta($post->ID,'_my_meta',TRUE);
-  
+
   $job_number   = (is_array($my_meta)&&$my_meta['job_number']<>''? $my_meta['job_number'] : $custom["job_number"][0]);
 	$agency 		= (is_array($my_meta)&&$my_meta['agency']<>'' ? $my_meta['agency'] 		: $custom["agency"][0]);
 	$location		= (is_array($my_meta)&&$my_meta['location']<>'' ? $my_meta['location'] 	: $custom["location"][0]);
@@ -133,13 +133,16 @@ add_action('save_post', 'save_job_meta');
 function save_job_meta(){
   global $post;
 
+  if(empty($_POST))
+    return;
+
   $safe_url = $_POST["website"];
   if($safe_url[0] == "<" && $safe_url[1] == "a"){
     $website_pattern = '#[-a-zA-Z0-9@:%_\+.~\#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~\#?&//=]*)?#si';
     preg_match($website_pattern, $safe_url, $website_matches);
     $safe_url = $website_matches[0];
   }
- 
+
   update_post_meta($post->ID, "job_number", $_POST["job_number"]);
   update_post_meta($post->ID, "agency", $_POST["agency"]);
   update_post_meta($post->ID, "location", $_POST["location"]);
@@ -153,7 +156,7 @@ function save_job_meta(){
   update_post_meta($post->ID, "contact_email", $_POST["contact_email"]);
   update_post_meta($post->ID, "contact_phone", $_POST["contact_phone"]);
   update_post_meta($post->ID, "fileupload", $_POST["fileupload"]);
-  
+
 }
 
 /**
@@ -165,11 +168,11 @@ function save_job_meta(){
 function job_postings_shortcode() {
 	global $post;
 
-	$paged = 1; 
-	if ( get_query_var('paged') ) $paged = get_query_var('paged'); 
-	if ( get_query_var('page') ) $paged = get_query_var('page'); 
-	 
-	query_posts( '&post_type=job_posting&post_status=publish&posts_per_page='.get_option('posts_per_page').'&paged=' . $paged ); 
+	$paged = 1;
+	if ( get_query_var('paged') ) $paged = get_query_var('paged');
+	if ( get_query_var('page') ) $paged = get_query_var('page');
+
+	query_posts( '&post_type=job_posting&post_status=publish&posts_per_page='.get_option('posts_per_page').'&paged=' . $paged );
 	include( 'loop-job_listings.php');
 
 }
@@ -182,7 +185,7 @@ add_filter( 'archive_template', 'jobs_get_archive_template' );
 function jobs_get_archive_template( $archive_template ) {
   global $post;
   $plugindir = dirname( __FILE__ );
-  
+
   if(is_archive() && get_post_type() == 'job_posting'){
     $archive_template = $plugindir . '/archive-job_posting.php';
   }
@@ -193,7 +196,7 @@ add_filter( 'search_template', 'jobs_get_search_template' );
 function jobs_get_search_template( $search_template ) {
   global $post;
   $plugindir = dirname( __FILE__ );
-  
+
   if( get_query_var( 'post_type' ) == 'job_posting' ) {
     $search_template = $plugindir . '/archive-job_posting.php';
   }
@@ -204,7 +207,7 @@ add_filter( 'single_template', 'jobs_get_single_template' );
 function jobs_get_single_template( $single_template ) {
   global $post;
   $plugindir = dirname( __FILE__ );
-  
+
   if( get_query_var( 'post_type' ) == 'job_posting' ) {
     $single_template = $plugindir . '/single-job_posting.php';
   }
