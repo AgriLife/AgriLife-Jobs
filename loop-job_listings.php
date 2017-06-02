@@ -23,19 +23,19 @@
 
 
 	<div class="job-search-form">
-		<label>
-		<h4>Search Job Board Database</h4>
+		<label for="job-search-title-field">
+		<h2>Search Job Board Database</h2>
 		</label>
 		<form role="search" class="searchform" method="get" id="searchform" action="<?php echo home_url( '/' ); ?>">
-			<input type="text" class="s" name="s" id="s" placeholder="Wildlife Biologist" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;"/><br />
+			<input type="text" class="s" name="job-search-title-field" id="job-search-title-field" placeholder="Wildlife Biologist" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;"/><br />
 			<input type="hidden" name="post_type" value="job_posting" />
 		</form>
 	</div>
-				
-	<?php 
+
+	<?php
 		//might need to beef up the search later
-	 	//job_posting_search($_GET['job_type'],$_GET['searchjobpostings']); 
-	?>		
+	 	//job_posting_search($_GET['job_type'],$_GET['searchjobpostings']);
+	?>
 
 	<?php /* If there are no tests to display, let the user know */ ?>
 	<?php if ( ! have_posts() ) : ?>
@@ -46,20 +46,20 @@
 			</div><!-- .entry-content -->
 		</div><!-- #post-0 -->
 	<?php endif; ?>
-	
-	
+
+
 	<ul class="job-listing-ul">
-	<?php	
+	<?php
 			while (have_posts()) : the_post();
 				global $post;
 			$my_meta = get_post_meta($post->ID,'_my_meta',TRUE);
-			
+
 			$custom = get_post_custom($post->ID);
-			
+
 			//echo '<hr />my_meta:<pre>'.print_r($my_meta['agency']).'</pre>';
 			//echo 'agency: '.$my_meta['agency'];
 			//echo '<hr />custom:<pre>'.print_r($custom).'</pre>';
-		
+
 			$job_number     = (is_array($my_meta)&&$my_meta['job_number']<>'' ? $my_meta['job_number']	: $custom["job_number"][0]);
 			if($job_number=='')
 				$job_number = get_the_ID();
@@ -68,20 +68,20 @@
 				?>
 			<li class="job-listing-item">
 				<a class="job-listing-link" href="<?php the_permalink(); ?>">
-				<div class="role">
-					<h2 class="job-title" title="<?php the_title(); ?>"><?php the_title(); ?></h2>
-					<h3 class="job-agency"><?php echo $agency; ?></h3>
-					<h4 class="job-posted-date">Posted: <?php echo get_the_date('M-d-y'); ?></h4>
-					<h4 class="job-number">Job: <?php echo $job_number; ?></h4>
-					<p class="job-location location"><?php echo $location; ?></p>
-					<!--<p class="job-type type"></p>-->
-				</div>
+					<div class="role">
+						<h3 class="job-title" title="Job title and state"><?php the_title(); ?></h3>
+						<div class="job-agency"><?php echo $agency; ?></div>
+						<div class="job-posted-date">Posted: <?php echo get_the_date('M-d-y'); ?></div>
+						<div class="job-number">Job: <?php echo $job_number; ?></div>
+						<p class="job-location location"><?php echo $location; ?></p>
+						<!--<p class="job-type type"></p>-->
+					</div>
 				</a>
 			</li>
-			
+
 		<?php endwhile;?>
 	</ul>
-	
+
 	<div class="navigation">
 		<div class="alignleft"><?php next_posts_link('Previous entries') ?></div>
 		<div class="alignright"><?php previous_posts_link('Next entries') ?></div>

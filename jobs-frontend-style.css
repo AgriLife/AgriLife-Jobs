@@ -15,8 +15,9 @@
 	margin: 0;
 }
 
-.job-search-form label h4 {
+.job-search-form label h2 {
 	margin-bottom: 5px;
+	font-size: 1.25em;
 }
 
 .job-listing-ul,
@@ -39,7 +40,7 @@
 	margin-top: .5em;
 	margin-bottom: .5em;
 	padding-left: 0;
-	overflow: hidden;
+	overflow: visible;
 	display: block;
 	background: #EAE6D2;
 	background: rgba(217, 208, 173, .30);
@@ -54,15 +55,16 @@
 
 a.job-listing-link {
 	overflow: hidden;
-	display: block;	
+	display: block;
 	text-decoration: none;
 	padding: 10px;
-	border-bottom: 1px solid #d5d1c3;		
+	border-bottom: 1px solid #d5d1c3;
 }
 
-a.job-listing-link:hover {
+a.job-listing-link:hover,
+a.job-listing-link:focus {
 	background: #f1efce;
-	border-bottom: 1px solid #9f9490;		
+	border-bottom: 1px solid #9f9490;
 }
 
 .job-title {
@@ -92,7 +94,7 @@ body.home #content h4.job-number {
 #content p.job-location,
 .content p.job-location {
 	font-size: 12px;
-	color: #9f9490;
+	color: #222;
 	width: 30%;
 	margin: 0 0 0 65%;
 	padding-left: 20px;
