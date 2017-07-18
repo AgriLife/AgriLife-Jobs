@@ -114,4 +114,5 @@ dd.job-posting-dd {
 	border-bottom: 1px solid #d0ca9b;
 	margin: -3em 0 .5em 0;
 	padding: 0 0 .75em 195px;
+	white-space: pre-wrap;
 }
